@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Airtel Assignment</string>
+    <string name="search">Search</string>
+    <string name="daily">Daily</string>
+    <string name="weekly">Weekly</string>
+    <string name="monthly">Monthly</string>
+    <string name="unable_to_call_api">Unable to call api</string>
+    <string name="please_enter_query_to_search_images">Please enter query to search images</string>
+    <string name="unable_to_get_valid_server_response">Unable to get valid server response</string>
+    <string name="something_went_wrong_server_error">Something went wrong… Error message: %1$s</string>
+    <string name="unable_to_find_offline_results">Unable to find query results in offline mode</string>
+    <string name="error_in_loading_data">An Error Occurred While Loading Data!</string>
+    <string name="validation_type_something_to_search">Please type something to search</string>
+    <string name="error_showing_shared_transition">Error in showing shared element transition</string>
+    <string name="error_showing_details_img">Error in showing image</string>
+    <string name="no_results_found">No results found</string>
+    <string name="user_image">User Image</string>
+</resources>
