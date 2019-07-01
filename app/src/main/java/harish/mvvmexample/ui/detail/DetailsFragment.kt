@@ -2,6 +2,7 @@ package harish.mvvmexample.ui.detail
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.Menu
 import android.view.View
 import android.widget.ImageView
 import androidx.lifecycle.ViewModelProviders
@@ -12,6 +13,7 @@ import com.example.basemodule.utils.AlertUtils
 import harish.mvvmexample.R
 import harish.mvvmexample.base.MyBaseFragment
 import harish.mvvmexample.data.model.TrendingRepo
+import harish.mvvmexample.ui.main.ActionBarVisibilityListener
 import harish.mvvmexample.util.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_details.*
 
@@ -33,10 +35,8 @@ class DetailsFragment : MyBaseFragment() {
     private lateinit var selectedRepo: TrendingRepo
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
-        activity?.actionBar?.setDisplayShowHomeEnabled(true)
+
         detailsViewModel = ViewModelProviders.of(baseActivity!!, viewModelFactory).get(DetailsViewModel::class.java)
         selectedRepo = detailsViewModel.selectedRepo.value!!
         getDataFromBundle(arguments)
@@ -81,4 +81,14 @@ class DetailsFragment : MyBaseFragment() {
         }
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.clear()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+        val listener = activity as ActionBarVisibilityListener
+        listener.showActionBarBackButton()
+    }
 }

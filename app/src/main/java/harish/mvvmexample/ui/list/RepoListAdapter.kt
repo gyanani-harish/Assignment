@@ -14,6 +14,7 @@ import butterknife.ButterKnife
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.example.basemodule.base.AppTextView
 import harish.mvvmexample.R
 import harish.mvvmexample.data.model.TrendingRepo
 import java.util.*
@@ -73,9 +74,9 @@ class RepoListAdapter internal constructor(
         RecyclerView.ViewHolder(itemView) {
 
         @BindView(R.id.tv_repo_name)
-        lateinit var repoNameTextView: TextView
+        lateinit var repoNameTextView: AppTextView
         @BindView(R.id.tv_name)
-        lateinit var repoDescriptionTextView: TextView
+        lateinit var repoDescriptionTextView: AppTextView
 
         @BindView(R.id.img_user)
         lateinit var imgUser: ImageView

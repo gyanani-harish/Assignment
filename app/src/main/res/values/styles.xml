@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -10,10 +10,15 @@
         <item name="android:windowContentTransitions">true</item>
     </style>
     <style name="textStyle">
-        <item name="android:textColorLink">@color/textColor</item>
-        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColorLink">@color/textColorDark</item>
+        <item name="android:textColor">@color/textColorDark</item>
     </style>
     <style name="textStyle.white">
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">@color/textColorLight</item>
     </style>
+    <style name="HeaderBar">
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/textColorLight</item>
+    </style>
+
 </resources>

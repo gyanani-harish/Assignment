@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:background="@drawable/background"
-        android:layout_width="match_parent" android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <androidx.appcompat.widget.Toolbar
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:background="?attr/colorPrimary"
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="@dimen/small_elevation"
+    />
     <ImageView
+            android:layout_below="@+id/my_toolbar"
             android:layout_width="match_parent" android:layout_height="match_parent"
             android:src="@drawable/background"
             android:scaleType="centerCrop"
     />
     <FrameLayout
+            android:layout_below="@+id/my_toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 

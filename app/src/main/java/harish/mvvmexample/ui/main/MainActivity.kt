@@ -1,31 +1,27 @@
 package harish.mvvmexample.ui.main
 
-import android.app.SearchManager
 import android.content.Context
 import android.os.Bundle
-import android.text.TextUtils
 import android.transition.TransitionInflater
-import android.view.Menu
-import android.view.MenuItem
-import androidx.appcompat.widget.SearchView
-import com.example.basemodule.utils.AlertUtils
-import com.example.basemodule.utils.KeyboardUtils
-import com.example.basemodule.utils.StringUtils
-import harish.mvvmexample.R
-import harish.mvvmexample.base.MyBaseActivity
-import harish.mvvmexample.ui.list.ListFragment
-import harish.mvvmexample.ui.list.SearchListener
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProviders
+import harish.mvvmexample.R
+import harish.mvvmexample.base.MyBaseActivity
 import harish.mvvmexample.data.model.TrendingRepo
 import harish.mvvmexample.ui.detail.DetailsFragment
 import harish.mvvmexample.ui.detail.DetailsViewModel
+import harish.mvvmexample.ui.list.ListFragment
+import harish.mvvmexample.ui.list.SearchListener
 import harish.mvvmexample.ui.list.TransitionListener
 import harish.mvvmexample.util.ViewModelFactory
+import android.view.MenuItem
 
 
-class MainActivity : MyBaseActivity(), NavigationListener {
+
+
+class MainActivity : MyBaseActivity(), NavigationListener, ActionBarVisibilityListener {
 
 
     override val layoutRes: Int
@@ -37,6 +33,9 @@ class MainActivity : MyBaseActivity(), NavigationListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context = this
+        val toolbar = findViewById<View>(R.id.my_toolbar) as Toolbar
+        setSupportActionBar(toolbar)
+
         if (savedInstanceState == null) {
             val listFragment = ListFragment()
             listenersList.add(listFragment as SearchListener)
@@ -45,10 +44,28 @@ class MainActivity : MyBaseActivity(), NavigationListener {
         }
     }
 
+    override fun showActionBarBackButton() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+    }
+
+    override fun hideActionBarBackButton() {
+        supportActionBar?.setDisplayShowHomeEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+    }
+
     override fun onBackPressed() {
         super.onBackPressed()
         if (supportFragmentManager.backStackEntryCount == 0) {
             finish()
+        }
+        else {
+           val backStackEntry =  supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount-1)
+            val tag = backStackEntry.getName()
+            val fragment = supportFragmentManager.findFragmentByTag(tag)
+            if(fragment is RefreshListener){
+                fragment.onRefresh(null)
+            }
         }
     }
 
@@ -79,5 +96,12 @@ class MainActivity : MyBaseActivity(), NavigationListener {
 
         val detailsViewModel = ViewModelProviders.of(this, viewModelFactory).get(DetailsViewModel::class.java)
         detailsViewModel.selectedRepo.value = repo
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

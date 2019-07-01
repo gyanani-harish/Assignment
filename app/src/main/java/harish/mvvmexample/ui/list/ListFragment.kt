@@ -28,12 +28,15 @@ import com.example.basemodule.utils.KeyboardUtils
 import harish.mvvmexample.R
 import harish.mvvmexample.ui.detail.DetailsTransformation
 import harish.mvvmexample.ui.detail.DetailsViewModel
+import harish.mvvmexample.ui.main.ActionBarVisibilityListener
 import harish.mvvmexample.ui.main.NavigationListener
+import harish.mvvmexample.ui.main.RefreshListener
 import harish.mvvmexample.util.ViewModelFactory
 import kotlinx.android.synthetic.main.screen_list.*
 
 
-class ListFragment : MyBaseFragment(), RepoSelectedListener, SearchListener, TransitionListener {
+class ListFragment : MyBaseFragment(), RepoSelectedListener, SearchListener,
+    TransitionListener,RefreshListener {
     private var selectedLanguage: String = ""
     private var selectedTimePeriod: String = ""
     @BindView(R.id.tv_error)
@@ -48,6 +51,9 @@ class ListFragment : MyBaseFragment(), RepoSelectedListener, SearchListener, Tra
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
+        val listener = activity as ActionBarVisibilityListener
+        listener.
+            hideActionBarBackButton()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -115,7 +121,7 @@ class ListFragment : MyBaseFragment(), RepoSelectedListener, SearchListener, Tra
 
         val searchManager = context!!.getSystemService(Context.SEARCH_SERVICE) as SearchManager
         searchView.setSearchableInfo(searchManager.getSearchableInfo(activity!!.componentName))
-
+        searchView.setQueryHint("Enter language");
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 onSearchIconClicked(query)
@@ -128,8 +134,13 @@ class ListFragment : MyBaseFragment(), RepoSelectedListener, SearchListener, Tra
             }
 
         })
+        if(!TextUtils.isEmpty(selectedTimePeriod) && !TextUtils.isEmpty(selectedLanguage)){
+            //no need to call initial api
+            return
+        }
         selectedTimePeriod = getString(R.string.weekly)
         searchView.setQuery("java", true)
+        AlertUtils.longToast(context!!,getString(R.string.initial_filter_msg))
     }
 
     private fun onSearchIconClicked(query: String) {
@@ -147,5 +158,10 @@ class ListFragment : MyBaseFragment(), RepoSelectedListener, SearchListener, Tra
         this.sharedElementReturnTransition =
             TransitionInflater.from(context).inflateTransition(R.transition.default_transition)
         this.exitTransition = TransitionInflater.from(context).inflateTransition(android.R.transition.no_transition)
+    }
+
+    override fun onRefresh(payload: Any?) {
+        val listener = activity as ActionBarVisibilityListener
+        listener.hideActionBarBackButton()
     }
 }
