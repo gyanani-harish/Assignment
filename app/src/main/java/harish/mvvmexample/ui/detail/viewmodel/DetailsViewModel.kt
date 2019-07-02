@@ -1,4 +1,4 @@
-package harish.mvvmexample.ui.detail
+package harish.mvvmexample.ui.detail.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

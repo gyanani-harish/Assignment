@@ -6,7 +6,7 @@ import com.viksaa.sssplash.lib.activity.AwesomeSplash
 import com.viksaa.sssplash.lib.cnst.Flags
 import com.viksaa.sssplash.lib.model.ConfigSplash
 import harish.mvvmexample.R
-import harish.mvvmexample.ui.main.MainActivity
+import harish.mvvmexample.ui.main.view.MainActivity
 
 class SplashActivity : AwesomeSplash() {
 

@@ -1,11 +1,10 @@
-package harish.mvvmexample.ui.list
+package harish.mvvmexample.ui.list.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +16,8 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.basemodule.base.AppTextView
 import harish.mvvmexample.R
 import harish.mvvmexample.data.model.TrendingRepo
+import harish.mvvmexample.ui.list.viewmodel.ListViewModel
+import harish.mvvmexample.ui.list.listeners.RepoSelectedListener
 import java.util.*
 
 

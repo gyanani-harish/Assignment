@@ -1,4 +1,4 @@
-package harish.mvvmexample.ui.list
+package harish.mvvmexample.ui.list.view
 
 import android.app.SearchManager
 import android.content.Context
@@ -23,17 +23,22 @@ import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import com.example.basemodule.utils.AlertUtils
 import com.example.basemodule.utils.KeyboardUtils
-import com.example.basemodule.utils.StringUtils
 import com.example.basemodule.utils.StringUtils.Companion.equalsIgnoreCase
 import harish.mvvmexample.R
-import harish.mvvmexample.ui.main.ActionBarVisibilityListener
-import harish.mvvmexample.ui.main.NavigationListener
-import harish.mvvmexample.ui.main.RefreshListener
+import harish.mvvmexample.ui.list.viewmodel.ListViewModel
+import harish.mvvmexample.ui.list.adapter.RepoListAdapter
+import harish.mvvmexample.ui.list.listeners.RepoSelectedListener
+import harish.mvvmexample.ui.list.listeners.SearchListener
+import harish.mvvmexample.ui.list.listeners.TransitionListener
+import harish.mvvmexample.ui.main.listeners.ActionBarVisibilityListener
+import harish.mvvmexample.ui.main.listeners.NavigationListener
+import harish.mvvmexample.ui.main.listeners.RefreshListener
 import harish.mvvmexample.util.ViewModelFactory
 import kotlinx.android.synthetic.main.screen_list.*
 
 
-class ListFragment @Inject constructor() : MyBaseFragment(), RepoSelectedListener, SearchListener,
+class ListFragment @Inject constructor() : MyBaseFragment(), RepoSelectedListener,
+    SearchListener,
     TransitionListener, RefreshListener {
     private var selectedLanguage: String = ""
     private var selectedTimePeriod: String = ""

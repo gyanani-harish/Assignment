@@ -1,4 +1,4 @@
-package harish.mvvmexample.ui.main
+package harish.mvvmexample.ui.main.listeners
 
 interface ActionBarVisibilityListener {
     fun showActionBarBackButton()

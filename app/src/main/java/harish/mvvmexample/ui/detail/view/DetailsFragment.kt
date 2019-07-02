@@ -1,21 +1,19 @@
-package harish.mvvmexample.ui.detail
+package harish.mvvmexample.ui.detail.view
 
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.lifecycle.ViewModelProviders
 import butterknife.BindView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.basemodule.utils.AlertUtils
 import harish.mvvmexample.R
 import harish.mvvmexample.base.MyBaseFragment
 import harish.mvvmexample.data.model.TrendingRepo
-import harish.mvvmexample.ui.main.ActionBarVisibilityListener
+import harish.mvvmexample.ui.detail.viewmodel.DetailsViewModel
+import harish.mvvmexample.ui.main.listeners.ActionBarVisibilityListener
 import harish.mvvmexample.util.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_details.*
 

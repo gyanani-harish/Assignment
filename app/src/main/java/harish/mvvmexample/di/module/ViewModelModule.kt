@@ -6,8 +6,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import harish.mvvmexample.di.util.ViewModelKey
-import harish.mvvmexample.ui.detail.DetailsViewModel
-import harish.mvvmexample.ui.list.ListViewModel
+import harish.mvvmexample.ui.detail.viewmodel.DetailsViewModel
+import harish.mvvmexample.ui.list.viewmodel.ListViewModel
 import harish.mvvmexample.util.ViewModelFactory
 
 @Module

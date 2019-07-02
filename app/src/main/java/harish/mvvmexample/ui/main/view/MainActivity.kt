@@ -1,4 +1,4 @@
-package harish.mvvmexample.ui.main
+package harish.mvvmexample.ui.main.view
 
 import android.content.Context
 import android.os.Bundle
@@ -10,18 +10,22 @@ import androidx.lifecycle.ViewModelProviders
 import harish.mvvmexample.R
 import harish.mvvmexample.base.MyBaseActivity
 import harish.mvvmexample.data.model.TrendingRepo
-import harish.mvvmexample.ui.detail.DetailsFragment
-import harish.mvvmexample.ui.detail.DetailsViewModel
-import harish.mvvmexample.ui.list.ListFragment
-import harish.mvvmexample.ui.list.SearchListener
-import harish.mvvmexample.ui.list.TransitionListener
+import harish.mvvmexample.ui.detail.view.DetailsFragment
+import harish.mvvmexample.ui.detail.viewmodel.DetailsViewModel
+import harish.mvvmexample.ui.list.view.ListFragment
+import harish.mvvmexample.ui.list.listeners.SearchListener
+import harish.mvvmexample.ui.list.listeners.TransitionListener
 import harish.mvvmexample.util.ViewModelFactory
 import android.view.MenuItem
 import android.widget.ImageView
+import harish.mvvmexample.ui.main.listeners.ActionBarVisibilityListener
+import harish.mvvmexample.ui.main.listeners.NavigationListener
+import harish.mvvmexample.ui.main.listeners.RefreshListener
 import javax.inject.Inject
 
 
-class MainActivity : MyBaseActivity(), NavigationListener, ActionBarVisibilityListener {
+class MainActivity : MyBaseActivity(), NavigationListener,
+    ActionBarVisibilityListener {
 
 
     override val layoutRes: Int

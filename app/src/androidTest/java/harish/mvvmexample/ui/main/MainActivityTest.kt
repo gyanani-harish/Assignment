@@ -4,6 +4,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.rule.ActivityTestRule
 import harish.mvvmexample.R
+import harish.mvvmexample.ui.main.view.MainActivity
 import junit.framework.TestCase
 import org.junit.After
 import org.junit.Before

@@ -2,8 +2,8 @@ package harish.mvvmexample.di.module
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
-import harish.mvvmexample.ui.main.MainActivity
-import harish.mvvmexample.ui.main.MainFragmentBindingModule
+import harish.mvvmexample.ui.main.view.MainActivity
+import harish.mvvmexample.ui.main.binding_module.MainFragmentBindingModule
 
 @Module
 abstract class ActivityBindingModule {

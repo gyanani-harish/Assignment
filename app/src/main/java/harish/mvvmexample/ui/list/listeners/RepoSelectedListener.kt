@@ -1,4 +1,4 @@
-package harish.mvvmexample.ui.list
+package harish.mvvmexample.ui.list.listeners
 
 import android.widget.ImageView
 import harish.mvvmexample.data.model.TrendingRepo
