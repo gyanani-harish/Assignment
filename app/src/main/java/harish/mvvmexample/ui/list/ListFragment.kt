@@ -23,6 +23,8 @@ import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import com.example.basemodule.utils.AlertUtils
 import com.example.basemodule.utils.KeyboardUtils
+import com.example.basemodule.utils.StringUtils
+import com.example.basemodule.utils.StringUtils.Companion.equalsIgnoreCase
 import harish.mvvmexample.R
 import harish.mvvmexample.ui.main.ActionBarVisibilityListener
 import harish.mvvmexample.ui.main.NavigationListener
@@ -32,7 +34,7 @@ import kotlinx.android.synthetic.main.screen_list.*
 
 
 class ListFragment : MyBaseFragment(), RepoSelectedListener, SearchListener,
-    TransitionListener,RefreshListener {
+    TransitionListener, RefreshListener {
     private var selectedLanguage: String = ""
     private var selectedTimePeriod: String = ""
     @BindView(R.id.tv_error)
@@ -64,8 +66,10 @@ class ListFragment : MyBaseFragment(), RepoSelectedListener, SearchListener,
 
     override fun onRepoSelected(repo: TrendingRepo, sharedView: ImageView) {
         val nav = context as NavigationListener
-        nav.goToDetailsFragment(sharedView, sharedView.transitionName,
-            repo, viewModelFactory, fragmentManager, this@ListFragment)
+        nav.goToDetailsFragment(
+            sharedView, sharedView.transitionName,
+            repo, viewModelFactory, fragmentManager, this@ListFragment
+        )
     }
 
     private fun observableViewModel() {
@@ -130,13 +134,39 @@ class ListFragment : MyBaseFragment(), RepoSelectedListener, SearchListener,
             }
 
         })
-        if(!TextUtils.isEmpty(selectedTimePeriod) && !TextUtils.isEmpty(selectedLanguage)){
+        if (!TextUtils.isEmpty(selectedTimePeriod) && !TextUtils.isEmpty(selectedLanguage)) {
             //no need to call initial api
             return
         }
         selectedTimePeriod = getString(R.string.weekly)
         searchView.setQuery("java", true)
-        AlertUtils.longToast(context!!,getString(R.string.initial_filter_msg))
+        AlertUtils.longToast(context!!, getString(R.string.initial_filter_msg))
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item == null)
+            return super.onOptionsItemSelected(item)
+        val title = item.title.toString()
+        val result: Boolean
+        when {
+            equalsIgnoreCase(title, getString(R.string.daily)) -> {
+                selectedTimePeriod = getString(R.string.daily)
+                result = true
+            }
+            equalsIgnoreCase(title, getString(R.string.weekly)) -> {
+                selectedTimePeriod = getString(R.string.weekly)
+                result = true
+            }
+            equalsIgnoreCase(title, getString(R.string.monthly)) -> {
+                selectedTimePeriod = getString(R.string.monthly)
+                result = true
+            }
+            else -> result = false
+        }
+        if(result) {
+            onSearchIconClicked(selectedLanguage)
+        }
+        return result
     }
 
     private fun onSearchIconClicked(query: String) {

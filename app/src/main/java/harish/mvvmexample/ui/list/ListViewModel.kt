@@ -32,6 +32,7 @@ constructor(internal var repoRepository: RepoRepository) : ViewModel() {
     fun fetchRepos(language: String, timePeriod: String) {
         loading.value = true
         if (dispo != null) {
+            repos.value=ArrayList()
             disposable!!.remove(dispo!!)
         }
 
@@ -39,18 +40,19 @@ constructor(internal var repoRepository: RepoRepository) : ViewModel() {
             .observeOn(AndroidSchedulers.mainThread()).subscribeWith(object :
                 DisposableSingleObserver<List<TrendingRepo>>() {
                 override fun onSuccess(value: List<TrendingRepo>) {
+                    repos.value = value
+                    loading.value = false
                     if (value.isEmpty()) {
                         repoLoadError.value = R.string.no_results_found
                     } else {
                         repoLoadError.value = 0
                     }
-                    repos.value = value
-                    loading.value = false
                 }
 
                 override fun onError(e: Throwable) {
-                    repoLoadError.value = R.string.unable_to_get_valid_server_response
                     loading.value = false
+                    repoLoadError.value = R.string.unable_to_get_valid_server_response
+
                 }
             })
 

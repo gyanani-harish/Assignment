@@ -16,7 +16,7 @@ class SplashActivity : AwesomeSplash() {
         /* you don't have to override every property */
 
         //Customize Circular Reveal
-        configSplash.backgroundColor = R.color.colorPrimary //any color you want form colors.xml
+        configSplash.backgroundColor = R.color.colorPrimaryDark //any color you want form colors.xml
         configSplash.animCircularRevealDuration = 1200 //int ms
         configSplash.revealFlagX = Flags.REVEAL_RIGHT  //or Flags.REVEAL_LEFT
         configSplash.revealFlagY = Flags.REVEAL_BOTTOM //or Flags.REVEAL_TOP
