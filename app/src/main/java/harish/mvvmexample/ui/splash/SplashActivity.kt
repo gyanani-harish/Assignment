@@ -14,45 +14,44 @@ class SplashActivity : AwesomeSplash() {
     override fun initSplash(configSplash: ConfigSplash) {
 
         /* you don't have to override every property */
+        with(configSplash) {
+            backgroundColor = R.color.colorPrimaryDark
+            animCircularRevealDuration = 1200
+            revealFlagX = Flags.REVEAL_RIGHT
+            revealFlagY = Flags.REVEAL_BOTTOM
+        }
+        customizeLogoPath(configSplash)
+        customizeTitle(configSplash)
+    }
 
-        //Customize Circular Reveal
-        configSplash.backgroundColor = R.color.colorPrimaryDark //any color you want form colors.xml
-        configSplash.animCircularRevealDuration = 1200 //int ms
-        configSplash.revealFlagX = Flags.REVEAL_RIGHT  //or Flags.REVEAL_LEFT
-        configSplash.revealFlagY = Flags.REVEAL_BOTTOM //or Flags.REVEAL_TOP
+    private fun customizeLogoPath(configSplash: ConfigSplash) {
+        with(configSplash) {
+            //Customize Path
+            pathSplash = DROID_LOGO //set path String
+            originalHeight = 400 //in relation to your svg (path) resource
+            originalWidth = 400 //in relation to your svg (path) resource
+            animPathStrokeDrawingDuration = 500
+            pathSplashStrokeSize = 3 //I advise value be <5
+            pathSplashStrokeColor = R.color.colorAccent //any color you want form colors.xml
+            animPathFillingDuration = 400
+            pathSplashFillColor = R.color.colorLightTealBlue //path object filling color
+        }
+    }
 
-        //Choose LOGO OR PATH; if you don't provide String value for path it's logo by default
-
-        //Customize Logo
-        configSplash.logoSplash = R.mipmap.ic_launcher //or any other drawable
-        configSplash.animLogoSplashDuration = 600 //int ms
-        configSplash.animLogoSplashTechnique =
-            Techniques.Bounce //choose one form Techniques (ref: https://github.com/daimajia/AndroidViewAnimations)
-
-
-        //Customize Path
-        configSplash.pathSplash = DROID_LOGO //set path String
-        configSplash.originalHeight = 400 //in relation to your svg (path) resource
-        configSplash.originalWidth = 400 //in relation to your svg (path) resource
-        configSplash.animPathStrokeDrawingDuration = 500
-        configSplash.pathSplashStrokeSize = 3 //I advise value be <5
-        configSplash.pathSplashStrokeColor = R.color.colorAccent //any color you want form colors.xml
-        configSplash.animPathFillingDuration = 400
-        configSplash.pathSplashFillColor = R.color.colorLightTealBlue //path object filling color
-
-
-        //Customize Title
-        configSplash.titleSplash = getString(R.string.app_name)
-        configSplash.titleTextColor = R.color.colorTealBlue
-        configSplash.titleTextSize = 30f //float value
-        configSplash.animTitleDuration = 600
-        configSplash.animTitleTechnique = Techniques.FlipInX
-        configSplash.titleFont = "" //provide string to your font located in assets/fonts/
-
+    private fun customizeTitle(config: ConfigSplash) {
+        with(config) {
+            //Customize Title
+            titleSplash = getString(R.string.app_name)
+            titleTextColor = R.color.colorTealBlue
+            titleTextSize = 30f //float value
+            animTitleDuration = 600
+            animTitleTechnique = Techniques.FlipInX
+            titleFont = "" //provide string to your font located in assets/fonts/
+        }
     }
 
     override fun animationsFinished() {
-        startActivity(Intent(this,MainActivity::class.java))
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
         //transit to another activity here
         //or do whatever you want

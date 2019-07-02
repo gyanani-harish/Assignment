@@ -18,6 +18,7 @@ import harish.mvvmexample.ui.list.TransitionListener
 import harish.mvvmexample.util.ViewModelFactory
 import android.view.MenuItem
 import android.widget.ImageView
+import javax.inject.Inject
 
 
 class MainActivity : MyBaseActivity(), NavigationListener, ActionBarVisibilityListener {
@@ -28,15 +29,17 @@ class MainActivity : MyBaseActivity(), NavigationListener, ActionBarVisibilityLi
     private val listenersList = ArrayList<SearchListener>()
     private lateinit var transitionListener: TransitionListener
     private lateinit var context: Context
+    @Inject
+    lateinit var listFragment: ListFragment
+    @Inject
+    lateinit var detailsFragment: DetailsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         context = this
         val toolbar = findViewById<View>(R.id.my_toolbar) as Toolbar
         setSupportActionBar(toolbar)
-
         if (savedInstanceState == null) {
-            val listFragment = ListFragment()
             listenersList.add(listFragment as SearchListener)
             transitionListener = listFragment
 
@@ -78,8 +81,6 @@ class MainActivity : MyBaseActivity(), NavigationListener, ActionBarVisibilityLi
         listFragment: ListFragment
     ) {
         transitionListener.setTransitions()
-        val detailsFragment = DetailsFragment()
-        //val detailsFragment = TestDetailsFragment()
         detailsFragment.sharedElementEnterTransition = TransitionInflater.from(context)
             .inflateTransition(R.transition.default_transition)
         detailsFragment.enterTransition = TransitionInflater.from(context)

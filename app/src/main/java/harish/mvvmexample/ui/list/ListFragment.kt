@@ -33,7 +33,7 @@ import harish.mvvmexample.util.ViewModelFactory
 import kotlinx.android.synthetic.main.screen_list.*
 
 
-class ListFragment : MyBaseFragment(), RepoSelectedListener, SearchListener,
+class ListFragment @Inject constructor() : MyBaseFragment(), RepoSelectedListener, SearchListener,
     TransitionListener, RefreshListener {
     private var selectedLanguage: String = ""
     private var selectedTimePeriod: String = ""

@@ -22,7 +22,7 @@ import kotlinx.android.synthetic.main.fragment_details.*
 import javax.inject.Inject
 
 
-class DetailsFragment : MyBaseFragment() {
+class DetailsFragment @Inject constructor() : MyBaseFragment() {
     private var transitionName: String? = null
     override val layoutRes: Int
         get() = R.layout.fragment_details
