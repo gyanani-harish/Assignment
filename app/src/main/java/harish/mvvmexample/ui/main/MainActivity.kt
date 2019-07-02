@@ -17,8 +17,7 @@ import harish.mvvmexample.ui.list.SearchListener
 import harish.mvvmexample.ui.list.TransitionListener
 import harish.mvvmexample.util.ViewModelFactory
 import android.view.MenuItem
-
-
+import android.widget.ImageView
 
 
 class MainActivity : MyBaseActivity(), NavigationListener, ActionBarVisibilityListener {
@@ -40,6 +39,7 @@ class MainActivity : MyBaseActivity(), NavigationListener, ActionBarVisibilityLi
             val listFragment = ListFragment()
             listenersList.add(listFragment as SearchListener)
             transitionListener = listFragment
+
             addFragment(listFragment, ListFragment::class.java.simpleName)
         }
     }
@@ -61,7 +61,7 @@ class MainActivity : MyBaseActivity(), NavigationListener, ActionBarVisibilityLi
         }
         else {
            val backStackEntry =  supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount-1)
-            val tag = backStackEntry.getName()
+            val tag = backStackEntry.name
             val fragment = supportFragmentManager.findFragmentByTag(tag)
             if(fragment is RefreshListener){
                 fragment.onRefresh(null)
@@ -70,14 +70,16 @@ class MainActivity : MyBaseActivity(), NavigationListener, ActionBarVisibilityLi
     }
 
     override fun goToDetailsFragment(
-        sharedView: View,
+        sharedView: ImageView,
         transitionName: String,
         repo: TrendingRepo,
         viewModelFactory: ViewModelFactory,
-        fragmentManager: FragmentManager?
+        fragmentManager: FragmentManager?,
+        listFragment: ListFragment
     ) {
         transitionListener.setTransitions()
         val detailsFragment = DetailsFragment()
+        //val detailsFragment = TestDetailsFragment()
         detailsFragment.sharedElementEnterTransition = TransitionInflater.from(context)
             .inflateTransition(R.transition.default_transition)
         detailsFragment.enterTransition = TransitionInflater.from(context)
@@ -86,11 +88,13 @@ class MainActivity : MyBaseActivity(), NavigationListener, ActionBarVisibilityLi
         bundle.putString("transitionName", sharedView.transitionName)
         detailsFragment.arguments = bundle
 
-        val fragmentTransaction = fragmentManager?.beginTransaction()
+
+        val fragmentTransaction = supportFragmentManager?.beginTransaction()
         val detailsTag = DetailsFragment::class.java.simpleName
         fragmentTransaction?.add(R.id.screenContainer, detailsFragment, detailsTag)
-        fragmentTransaction?.addToBackStack(detailsTag)
+        fragmentTransaction?.addToBackStack(null)
         fragmentTransaction?.addSharedElement(sharedView, sharedView.transitionName)
+        fragmentTransaction?.detach(listFragment)
         //detailsFragment.sharedElementReturnTransition = DetailsTransformation()
         fragmentTransaction?.commit()
 

@@ -2,8 +2,10 @@ package harish.mvvmexample.ui.detail
 
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.lifecycle.ViewModelProviders
 import butterknife.BindView
@@ -39,7 +41,6 @@ class DetailsFragment : MyBaseFragment() {
 
         detailsViewModel = ViewModelProviders.of(baseActivity!!, viewModelFactory).get(DetailsViewModel::class.java)
         selectedRepo = detailsViewModel.selectedRepo.value!!
-        getDataFromBundle(arguments)
         setData(selectedRepo)
     }
 
@@ -60,16 +61,13 @@ class DetailsFragment : MyBaseFragment() {
             AlertUtils.longToast(context, getString(R.string.error_showing_shared_transition))
         }
         if (!TextUtils.isEmpty(imgURL)) {
-            context?.let {
-                Glide
 
-                    .with(it)
-                    .load(imgURL)
-                    .dontAnimate()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .placeholder(R.mipmap.ic_launcher)
-                    .into(img)
-            }
+            Glide
+                .with(context!!)
+                .load(imgURL)
+                .placeholder(R.mipmap.ic_launcher)
+                .into(img)
+
         } else {
             AlertUtils.longToast(context, getString(R.string.error_showing_details_img))
         }
@@ -90,5 +88,6 @@ class DetailsFragment : MyBaseFragment() {
         setHasOptionsMenu(true)
         val listener = activity as ActionBarVisibilityListener
         listener.showActionBarBackButton()
+        getDataFromBundle(arguments)
     }
 }

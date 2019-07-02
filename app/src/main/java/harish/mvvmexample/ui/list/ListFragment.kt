@@ -14,11 +14,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import butterknife.BindView
 import harish.mvvmexample.base.MyBaseFragment
 import harish.mvvmexample.data.model.TrendingRepo
-import harish.mvvmexample.ui.detail.DetailsFragment
 
 import javax.inject.Inject
 import android.widget.ImageView
@@ -26,8 +24,6 @@ import androidx.appcompat.widget.SearchView
 import com.example.basemodule.utils.AlertUtils
 import com.example.basemodule.utils.KeyboardUtils
 import harish.mvvmexample.R
-import harish.mvvmexample.ui.detail.DetailsTransformation
-import harish.mvvmexample.ui.detail.DetailsViewModel
 import harish.mvvmexample.ui.main.ActionBarVisibilityListener
 import harish.mvvmexample.ui.main.NavigationListener
 import harish.mvvmexample.ui.main.RefreshListener
@@ -52,8 +48,7 @@ class ListFragment : MyBaseFragment(), RepoSelectedListener, SearchListener,
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         val listener = activity as ActionBarVisibilityListener
-        listener.
-            hideActionBarBackButton()
+        listener.hideActionBarBackButton()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -69,7 +64,8 @@ class ListFragment : MyBaseFragment(), RepoSelectedListener, SearchListener,
 
     override fun onRepoSelected(repo: TrendingRepo, sharedView: ImageView) {
         val nav = context as NavigationListener
-        nav.goToDetailsFragment(sharedView, sharedView.transitionName, repo, viewModelFactory, fragmentManager)
+        nav.goToDetailsFragment(sharedView, sharedView.transitionName,
+            repo, viewModelFactory, fragmentManager, this@ListFragment)
     }
 
     private fun observableViewModel() {
