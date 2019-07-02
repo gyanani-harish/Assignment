@@ -58,12 +58,12 @@ class MainActivity : MyBaseActivity(), NavigationListener, ActionBarVisibilityLi
         super.onBackPressed()
         if (supportFragmentManager.backStackEntryCount == 0) {
             finish()
-        }
-        else {
-           val backStackEntry =  supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount-1)
+        } else {
+            val backStackEntry =
+                supportFragmentManager.getBackStackEntryAt(supportFragmentManager.backStackEntryCount - 1)
             val tag = backStackEntry.name
             val fragment = supportFragmentManager.findFragmentByTag(tag)
-            if(fragment is RefreshListener){
+            if (fragment is RefreshListener) {
                 fragment.onRefresh(null)
             }
         }
@@ -85,7 +85,7 @@ class MainActivity : MyBaseActivity(), NavigationListener, ActionBarVisibilityLi
         detailsFragment.enterTransition = TransitionInflater.from(context)
             .inflateTransition(android.R.transition.no_transition)
         val bundle = Bundle()
-        bundle.putString("transitionName", sharedView.transitionName)
+        bundle.putString(DetailsFragment.INTENT_KEY_TRANSITION_NAME, sharedView.transitionName)
         detailsFragment.arguments = bundle
 
 

@@ -26,9 +26,7 @@ class DetailsFragment : MyBaseFragment() {
     private var transitionName: String? = null
     override val layoutRes: Int
         get() = R.layout.fragment_details
-    private var startingPosition: Int = 0
-    private var currentPosition: Int = 0
-    private var isReturning: Boolean = false
+
     @BindView(R.id.img)
     internal lateinit var img: ImageView
     @Inject
@@ -36,7 +34,9 @@ class DetailsFragment : MyBaseFragment() {
     private lateinit var detailsViewModel: DetailsViewModel
     private lateinit var selectedRepo: TrendingRepo
 
-
+    companion object{
+        const val INTENT_KEY_TRANSITION_NAME="transitionName"
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         detailsViewModel = ViewModelProviders.of(baseActivity!!, viewModelFactory).get(DetailsViewModel::class.java)
@@ -75,7 +75,7 @@ class DetailsFragment : MyBaseFragment() {
 
     private fun getDataFromBundle(bundle: Bundle?) {
         if (bundle != null) {
-            transitionName = bundle.getString("transitionName")
+            transitionName = bundle.getString(INTENT_KEY_TRANSITION_NAME)
         }
     }
 

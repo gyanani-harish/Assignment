@@ -1,4 +1,4 @@
-package harish.mvvmexample.ui
+package harish.mvvmexample.ui.splash
 
 import android.content.Intent
 import com.daimajia.androidanimations.library.Techniques
